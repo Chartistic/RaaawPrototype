@@ -282,32 +282,43 @@ table{border-collapse:collapse;width:100%}
 
 /* ================= v3: flow, kapitel, kategorie ================= */
 
-/* --- mobile navigation: burger --- */
-.burger{display:none;width:34px;height:34px;flex:none;position:relative;margin-left:4px}
+/* --- header: bereichsumschalter + burger-navigation --- */
+.seg{display:inline-flex;flex:none;border-radius:999px;box-shadow:inset 0 0 0 1px var(--hair);
+  padding:3px;gap:2px;margin-left:auto}
+.seg button{padding:7px 15px;border-radius:999px;font-size:var(--fs-sm);color:var(--ink-38);
+  white-space:nowrap;transition:background-color .25s var(--ease),color .25s var(--ease)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.hdr-trade .seg{box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.hdr-trade .seg button{color:rgba(255,255,255,.55)}
+.hdr-trade .seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+.cart{margin-left:0}
+
+.burger{display:block;width:34px;height:34px;flex:none;position:relative;margin-left:2px}
 .burger i{position:absolute;left:7px;right:7px;height:1.5px;background:var(--ink);border-radius:2px;
-  transition:transform .3s var(--ease),opacity .25s var(--ease)}
+  transition:transform .3s var(--ease)}
 .burger i:nth-child(1){top:13px}
 .burger i:nth-child(2){top:20px}
 .burger[aria-expanded="true"] i:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
 .burger[aria-expanded="true"] i:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
 .hdr-trade .burger i{background:var(--paper)}
-@media (max-width:760px){
-  .burger{display:block}
-  .hdr-in{gap:10px}
-  #hdrShop .tools,#hdrTrade .tools{position:fixed;left:0;right:0;top:var(--hdr-h,56px);
-    flex-direction:column;align-items:flex-start;gap:0;background:var(--paper);
-    border-bottom:1px solid var(--hair);padding:6px var(--gut) 18px;
-    max-height:0;overflow:hidden;visibility:hidden;
-    transition:max-height .34s var(--ease),visibility .34s}
-  #hdrShop .tools.is-open,#hdrTrade .tools.is-open{max-height:60vh;visibility:visible;overflow:auto}
-  .hdr-trade .tools{background:var(--ink);border-bottom-color:rgba(255,255,255,.16)}
-  .tools > button{width:100%;text-align:left;padding:15px 0;font-size:var(--fs-md);
-    border-bottom:1px solid var(--hair)}
-  .hdr-trade .tools > button{border-bottom-color:rgba(255,255,255,.14)}
-  .tools .lang{padding-top:16px}
-  .tools button[aria-current="page"]::after{display:none}
-  .cart{margin-left:auto}
-}
+
+.hdr .tools{position:fixed;top:var(--hdr-h,56px);right:0;width:min(340px,100vw);
+  flex-direction:column;align-items:stretch;gap:0;background:var(--paper);
+  border-left:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:4px clamp(18px,2vw,26px) 20px;
+  max-height:0;overflow:hidden;visibility:hidden;
+  transition:max-height .34s var(--ease),visibility .34s;
+  box-shadow:0 22px 44px rgba(11,11,10,.09)}
+@media (max-width:560px){.hdr .tools{width:100vw;border-left:0}}
+.hdr .tools.is-open{max-height:min(76vh,620px);visibility:visible;overflow:auto}
+.hdr-trade .tools{background:var(--ink);border-color:rgba(255,255,255,.16)}
+.hdr .tools > button{width:100%;text-align:left;padding:15px 0;font-size:var(--fs-md);
+  border-bottom:1px solid var(--hair);color:var(--ink-60)}
+.hdr .tools > button:hover{color:var(--ink)}
+.hdr-trade .tools > button{border-bottom-color:rgba(255,255,255,.14);color:rgba(255,255,255,.62)}
+.hdr-trade .tools > button:hover{color:var(--paper)}
+.hdr .tools .lang{padding-top:16px}
+.hdr .tools button[aria-current="page"]::after{display:none}
 
 /* --- kategorie: clean label --- */
 .cat-h{max-width:24ch}
@@ -810,18 +821,26 @@ body.lb-open{overflow:hidden}
       <span class="wm-gap" aria-hidden="true"></span>
       <button type="button" data-go="home" tabindex="-1" aria-hidden="true">w</button>
     </div>
-    <nav class="tools" id="navTools" aria-label="Hauptnavigation">
-      <button type="button" data-go="sorten">sorten</button>
-      <button type="button" data-go="story">herkunft</button>
-      <button type="button" data-go="b2b" class="nav-trade">für betriebe</button>
+    <div class="seg" role="group" aria-label="Bereich wählen">
+      <button type="button" data-go="home" aria-pressed="true">shop</button>
+      <button type="button" data-go="b2b" aria-pressed="false">betriebe</button>
+    </div>
+    <span class="cart">warenkorb (<span id="cartN">0</span>)</span>
+    <button class="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="navTools">
+      <i></i><i></i>
+    </button>
+    <nav class="tools" id="navTools" aria-label="Abschnitte">
+      <button type="button" data-go="sorten">alle sorten</button>
+      <button type="button" data-jump="beweis">der zuckervergleich</button>
+      <button type="button" data-jump="kategorie">was nicht drin ist</button>
+      <button type="button" data-jump="reviews">bewertungen</button>
+      <button type="button" data-go="story">herkunft der frucht</button>
+      <button type="button" data-jump="packs">kaufen</button>
+      <button type="button" data-jump="faq">häufige fragen</button>
       <span class="lang" role="group" aria-label="Sprache">
         <button type="button" data-lang="de" aria-pressed="true">de</button><span aria-hidden="true">/</span><button type="button" data-lang="en" aria-pressed="false">en</button>
       </span>
     </nav>
-    <span class="cart">warenkorb (<span id="cartN">0</span>)</span>
-    <button class="burger" id="burger" type="button" aria-label="Menü" aria-expanded="false" aria-controls="navTools">
-      <i></i><i></i>
-    </button>
   </div>
 </header>
 
@@ -831,19 +850,24 @@ body.lb-open{overflow:hidden}
       <button type="button" data-go="b2b" aria-label="raaaw für Betriebe">raaaw</button>
       <span class="trade-tag">für betriebe</span>
     </div>
-    <nav class="tools" aria-label="Navigation für Betriebe">
+    <div class="seg" role="group" aria-label="Bereich wählen">
+      <button type="button" data-go="home" aria-pressed="false">shop</button>
+      <button type="button" data-go="b2b" aria-pressed="true">betriebe</button>
+    </div>
+    <button class="burger" type="button" aria-label="Menü" aria-expanded="false">
+      <i></i><i></i>
+    </button>
+    <nav class="tools" aria-label="Abschnitte für Betriebe">
       <button type="button" data-jump="sortiment">sortiment</button>
-      <button type="button" data-jump="konditionen">konditionen</button>
-      <button type="button" data-jump="regal">am regal</button>
+      <button type="button" data-jump="argument">regalargument</button>
+      <button type="button" data-jump="ablauf">so läuft es an</button>
+      <button type="button" data-jump="konditionen">einstieg</button>
+      <button type="button" data-jump="regal">deko &amp; material</button>
       <button type="button" data-jump="kontakt">kontakt</button>
       <span class="lang" role="group" aria-label="Sprache">
         <button type="button" data-lang="de" aria-pressed="true">de</button><span aria-hidden="true">/</span><button type="button" data-lang="en" aria-pressed="false">en</button>
       </span>
-      <button type="button" class="leave" data-go="home">← zum onlineshop</button>
     </nav>
-    <button class="burger" type="button" aria-label="Menü" aria-expanded="false">
-      <i></i><i></i>
-    </button>
   </div>
 </header>
 
@@ -1277,7 +1301,7 @@ body.lb-open{overflow:hidden}
   </section>
 
 
-  <section class="band">
+  <section class="band" id="faq">
     <div class="wrap">
       <div class="band-head">
         <h2 class="h2">was ihr uns am häufigsten fragt.</h2>
@@ -2222,6 +2246,12 @@ body.lb-open{overflow:hidden}
     hdrTrade.hidden = !trade;
     shopFooter.hidden = trade;
 
+    document.querySelectorAll(".seg button[data-go]").forEach(function(b){
+      var t = b.getAttribute("data-go");
+      var on = (t === "b2b") ? trade : !trade;
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+
     document.querySelectorAll("#hdrShop .tools button[data-go]").forEach(function(b){
       var target = b.getAttribute("data-go");
       var on = target === key || (key === "pdp" && target === "sorten");
@@ -2254,8 +2284,7 @@ body.lb-open{overflow:hidden}
 
   /* ---------- mobile menü ---------- */
   (function(){
-    var burger = document.getElementById("burger");
-    if (!burger) return;
+    if (!document.querySelector(".burger")) return;
     function hdrH(){
       var el = document.querySelector("#hdrShop:not([hidden])") || document.querySelector("#hdrTrade:not([hidden])");
       var v = el ? Math.round(el.getBoundingClientRect().height) : 56;
@@ -2296,8 +2325,16 @@ body.lb-open{overflow:hidden}
     var jump = e.target.closest("[data-jump]");
     if (jump){
       e.preventDefault();
-      var el = document.getElementById(jump.getAttribute("data-jump"));
-      if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
+      var id = jump.getAttribute("data-jump");
+      var el = document.getElementById(id);
+      if (!el) return;
+      var view = el.closest(".view");
+      if (view && !view.classList.contains("on")){
+        var key = view.id.replace("v-", "");
+        show(key === "home" ? "home" : key, id);
+        return;
+      }
+      el.scrollIntoView({behavior:"smooth", block:"start"});
       return;
     }
 
