@@ -85,6 +85,10 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 .rw-sortrow:hover .rw-fill,.rw-sortrow:focus-within .rw-fill{transform:scaleY(1)}
 .rw-cansmall{transition:transform .5s cubic-bezier(.22,1,.36,1)}
 .rw-sortrow:hover .rw-cansmall{transform:translateY(-4px) rotate(-3deg)}
+
+@media (min-width:900px){
+  .rw-hero-split{grid-template-columns:minmax(0,1.4fr) minmax(0,0.6fr)!important}
+}
 </style>
 </helmet>
 
@@ -119,14 +123,14 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
       </div>
     </div>
 
-    <div style="flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(24px,4vw,64px);align-items:center;margin-top:clamp(32px,5vw,72px)">
+    <div class="rw-hero-split" style="flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(24px,4vw,64px);align-items:center;margin-top:clamp(32px,5vw,72px)">
       <div>
         <p style="margin:0;font-size:16px;letter-spacing:-0.01em;color:rgba(11,11,10,0.62)">alles, was in raaaw {{ flavorName }} drin ist:</p>
         <ol style="list-style:none;margin:clamp(18px,2.6vw,34px) 0 0;padding:0">
           <sc-for list="{{ ing }}" as="row" hint-placeholder-count="4">
             <li style="display:grid;grid-template-columns:clamp(28px,4vw,44px) minmax(0,1fr);align-items:baseline;gap:clamp(8px,1.4vw,18px)">
               <span style="font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.4)">{{ row.n }}</span>
-              <span style="font-weight:200;font-size:clamp(1.9rem,3.9vw,3.6rem);line-height:1.08;letter-spacing:-0.042em;overflow-wrap:normal">{{ row.t }}</span>
+              <span style="font-weight:200;font-size:clamp(2rem,5.8vw,5.4rem);line-height:1.02;letter-spacing:-0.045em;overflow-wrap:normal">{{ row.t }}</span>
             </li>
           </sc-for>
         </ol>
