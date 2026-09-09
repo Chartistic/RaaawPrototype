@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__resources={"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"./vendor/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"};</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -87,7 +88,7 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 .rw-sortrow:hover .rw-cansmall{transform:translateY(-4px) rotate(-3deg)}
 
 @media (min-width:900px){
-  .rw-hero-split{grid-template-columns:minmax(0,1.4fr) minmax(0,0.6fr)!important}
+  .rw-hero-split{grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr)!important}
 }
 </style>
 </helmet>
@@ -130,7 +131,7 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
           <sc-for list="{{ ing }}" as="row" hint-placeholder-count="4">
             <li style="display:grid;grid-template-columns:clamp(28px,4vw,44px) minmax(0,1fr);align-items:baseline;gap:clamp(8px,1.4vw,18px)">
               <span style="font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.4)">{{ row.n }}</span>
-              <span style="font-weight:200;font-size:clamp(2rem,5.8vw,5.4rem);line-height:1.02;letter-spacing:-0.045em;overflow-wrap:normal">{{ row.t }}</span>
+              <span style="font-weight:200;font-size:clamp(2rem,4.7vw,4.3rem);line-height:1.04;letter-spacing:-0.045em;overflow-wrap:normal">{{ row.t }}</span>
             </li>
           </sc-for>
         </ol>
