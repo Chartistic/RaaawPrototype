@@ -37,10 +37,8 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 
 .rw-clip{position:relative;display:block;width:100%;aspect-ratio:9/16;padding:0;border:0;background:#EDEDE6;
   overflow:hidden;cursor:pointer}
-.rw-clip-poster,.rw-clip-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.rw-clip-vid{opacity:0;transition:opacity .3s ease}
-.rw-clip.is-playing .rw-clip-vid{opacity:1}
-.rw-clip.is-playing .rw-clip-poster{opacity:0}
+.rw-clip-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#EDEDE6}
+.rw-clip-play,.rw-clip-cap{pointer-events:none}
 .rw-clip.is-playing .rw-clip-play::after{border:0;width:4px;height:13px;border-left:4px solid #0B0B0A;
   border-right:4px solid #0B0B0A;margin-left:0}
 .rw-clip-play{position:absolute;top:14px;left:14px;width:36px;height:36px;border-radius:50%;
@@ -157,8 +155,7 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
         <sc-for list="{{ clips }}" as="c" hint-placeholder-count="5">
           <figure style="margin:0;scroll-snap-align:start;background:#FCFCFA;display:flex;flex-direction:column">
             <button type="button" class="rw-clip" aria-label="clip abspielen: {{ c.cap }}">
-              <img class="rw-clip-poster" src="{{ c.pos }}" alt="{{ c.cap }}" loading="lazy">
-              <video class="rw-clip-vid" src="{{ c.vid }}" playsinline loop preload="none" aria-hidden="true"></video>
+              <video class="rw-clip-vid" src="{{ c.vid }}" poster="{{ c.pos }}" playsinline loop muted preload="metadata"></video>
               <span class="rw-clip-play" aria-hidden="true"></span>
               <span class="rw-clip-cap">{{ c.cap }}</span>
             </button>
@@ -1028,7 +1025,7 @@ class Component extends DCLogic {
     document.querySelectorAll('.rw-clip.is-playing').forEach(function (o) {
       var v = o.querySelector('.rw-clip-vid'); if (v) { v.pause(); } o.classList.remove('is-playing');
     });
-    vid.muted = false; vid.currentTime = 0;
+    vid.muted = false;
     var p = vid.play();
     if (p && p.catch) { p.catch(function () { vid.muted = true; vid.play(); }); }
     btn.classList.add('is-playing');
