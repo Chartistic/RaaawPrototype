@@ -645,6 +645,168 @@ body.lb-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.col-bar{transform:none;animation:none}}
 .chart + .deep{margin-top:clamp(74px,8vw,110px)}
 
+
+/* aus Variante B übernommen */
+/* ---------- frucht: anbau & verarbeitung je sorte ---------- */
+.fr-grid{list-style:none;margin:0;padding:0;display:grid;gap:clamp(16px,2vw,30px);
+  grid-template-columns:repeat(2,minmax(0,1fr))}
+.fr-card figure{margin:0 0 clamp(12px,1.4vw,18px)}
+.fr-card img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+.fr-ph{position:relative;aspect-ratio:4/5;border-radius:2px;display:grid;place-items:center;
+  background:linear-gradient(150deg,var(--a) 0%,var(--b) 100%)}
+.fr-ph span{font-size:var(--fs-xs);color:rgba(11,11,10,.5);letter-spacing:.06em}
+.fr-card h3{margin:0;font-weight:400;font-size:var(--fs-md);letter-spacing:-.02em;display:flex;align-items:baseline;gap:9px}
+.fr-dot{width:9px;height:9px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 1px rgba(11,11,10,.15)}
+.fr-o{margin:7px 0 0;font-size:var(--fs-sm);color:var(--ink-38)}
+.fr-d{margin:12px 0 0;font-size:var(--fs-sm);line-height:1.55;color:var(--ink-60)}
+/* ---------- deko am pos ---------- */
+.deko{display:grid;gap:clamp(18px,2.4vw,36px);grid-template-columns:1fr}
+.deko-fig{margin:0}
+.deko-fig img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+.deko-fig figcaption{margin-top:10px;font-size:var(--fs-xs);color:var(--ink-38)}
+.deko-list{margin-top:0}
+/* ================= v3: flow, kapitel, kategorie ================= */
+
+/* --- header: bereichsumschalter + burger-navigation --- */
+.seg{display:inline-flex;flex:none;border-radius:999px;box-shadow:inset 0 0 0 1px var(--hair);
+  padding:3px;gap:2px;margin-left:auto}
+.seg button{padding:7px 15px;border-radius:999px;font-size:var(--fs-sm);color:var(--ink-38);
+  white-space:nowrap;transition:background-color .25s var(--ease),color .25s var(--ease)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.hdr-trade .seg{box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.hdr-trade .seg button{color:rgba(255,255,255,.55)}
+.hdr-trade .seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+.burger{display:block;width:34px;height:34px;flex:none;position:relative;margin-left:2px}
+.burger i{position:absolute;left:7px;right:7px;height:1.5px;background:var(--ink);border-radius:2px;
+  transition:transform .3s var(--ease)}
+.burger i:nth-child(1){top:13px}
+.burger i:nth-child(2){top:20px}
+.burger[aria-expanded="true"] i:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+.burger[aria-expanded="true"] i:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+.hdr-trade .burger i{background:var(--paper)}
+.hdr .tools{position:fixed;top:var(--hdr-h,56px);right:0;width:min(340px,100vw);
+  flex-direction:column;align-items:stretch;gap:0;background:var(--paper);
+  border-left:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  padding:4px clamp(18px,2vw,26px) 20px;
+  max-height:0;overflow:hidden;visibility:hidden;
+  transition:max-height .34s var(--ease),visibility .34s;
+  box-shadow:0 22px 44px rgba(11,11,10,.09)}
+.hdr .tools.is-open{max-height:min(76vh,620px);visibility:visible;overflow:auto}
+.hdr-trade .tools{background:var(--ink);border-color:rgba(255,255,255,.16)}
+.hdr .tools > button{width:100%;text-align:left;padding:15px 0;font-size:var(--fs-md);
+  border-bottom:1px solid var(--hair);color:var(--ink-60)}
+.hdr .tools > button:hover{color:var(--ink)}
+.hdr-trade .tools > button{border-bottom-color:rgba(255,255,255,.14);color:rgba(255,255,255,.62)}
+.hdr-trade .tools > button:hover{color:var(--paper)}
+.hdr .tools .lang{padding-top:16px}
+.hdr .tools button[aria-current="page"]::after{display:none}
+/* --- kategorie: clean label --- */
+.cat-h{max-width:24ch}
+.nolist{list-style:none;margin:clamp(30px,4vw,56px) 0 0;padding:0;display:grid;
+  gap:clamp(14px,2vw,34px);grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:1px solid var(--hair);padding-top:clamp(26px,3vw,44px)}
+.nolist li{position:relative}
+.nolist span{display:inline-block;position:relative;font-weight:200;
+  font-size:clamp(1.6rem,3.4vw,2.9rem);letter-spacing:-.045em;line-height:1.05;color:var(--ink-38)}
+.nolist span::after{content:"";position:absolute;left:-4%;right:-4%;top:52%;height:3px;
+  border-radius:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;
+  animation:strike .7s var(--ease) forwards}
+.nolist li:nth-child(2) span::after{animation-delay:.1s}
+.nolist li:nth-child(3) span::after{animation-delay:.2s}
+.nolist li:nth-child(4) span::after{animation-delay:.3s}
+.yes-lab{margin:clamp(40px,5vw,72px) 0 clamp(16px,1.8vw,24px);padding-top:clamp(26px,3vw,40px);border-top:1px solid var(--hair)}
+.yeslist{list-style:none;margin:0;padding:0;display:grid;
+  gap:12px clamp(20px,3vw,44px);grid-template-columns:1fr}
+.yeslist li{display:flex;align-items:baseline;gap:11px;font-size:var(--fs-md);color:var(--ink)}
+.yeslist li::before{content:"";width:10px;height:10px;border-radius:50%;flex:none;
+  background:var(--accent);box-shadow:inset 0 0 0 1px rgba(11,11,10,.15);
+  transition:background-color .4s var(--ease)}
+/* --- perlage --- */
+.perl{display:grid;gap:clamp(24px,3vw,54px);grid-template-columns:1fr;align-items:center}
+.h3{margin:0;font-weight:200;font-size:clamp(1.5rem,2.6vw,2.2rem);letter-spacing:-.04em;line-height:1.08;max-width:18ch}
+.perl-txt p{margin:clamp(16px,1.8vw,22px) 0 0;font-size:var(--fs-md);line-height:1.55;color:var(--ink-60);max-width:52ch}
+.perl-scale{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);
+  gap:clamp(6px,.8vw,12px);align-items:stretch;min-height:150px}
+.perl-scale li{display:grid;grid-template-rows:1.5em 1fr auto;align-items:end}
+.perl-scale li::before{content:"";grid-row:2;display:block;border-radius:3px;background:var(--ink-20);
+  margin-bottom:14px;opacity:.45}
+.perl-scale li:nth-child(1)::before{height:4px}
+.perl-scale li:nth-child(2)::before{height:18px}
+.perl-scale li:nth-child(3)::before{height:38px}
+.perl-scale li:nth-child(4)::before{height:60px}
+.perl-scale li:nth-child(5)::before{height:84px}
+.perl-scale li.is-us::before{background:var(--accent);opacity:1}
+.perl-scale span{grid-row:3;display:block;font-size:var(--fs-xs);color:var(--ink-38);line-height:1.3}
+.perl-scale b{grid-row:1;display:block;font-weight:400;font-size:var(--fs-sm);color:var(--ink);line-height:1.2}
+/* --- kategorie-matrix --- */
+.matrix.cat table{min-width:760px}
+.matrix.cat th,.matrix.cat td{text-align:center;padding:14px 10px;font-size:var(--fs-sm)}
+.matrix.cat th:first-child,.matrix.cat td:first-child{text-align:left;width:26%;color:var(--ink-60)}
+.matrix.cat thead th{font-weight:400;font-size:var(--fs-sm);color:var(--ink-38);vertical-align:bottom}
+.matrix.cat thead th small{display:block;font-size:var(--fs-xs);color:var(--hair);margin-top:3px}
+.matrix.cat thead th.is-us{color:var(--ink)}
+.matrix.cat td.is-us{background:linear-gradient(180deg,var(--accent-22) 0%,rgba(255,255,255,0) 100%);
+  color:var(--ink);font-weight:400}
+.matrix.cat tbody td{color:var(--ink-38)}
+.matrix.cat tbody td:first-child{color:var(--ink-60)}
+/* --- kpi --- */
+.kpi{list-style:none;margin:0;padding:0;display:grid;gap:clamp(18px,2.4vw,36px);
+  grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--hair);padding-top:clamp(24px,3vw,40px)}
+.kpi b{display:block;font-weight:200;font-size:clamp(2rem,3.6vw,3.1rem);letter-spacing:-.045em;line-height:1}
+.kpi span{display:block;margin-top:10px;font-size:var(--fs-sm);color:var(--ink-38);line-height:1.4}
+/* --- ablauf handel --- */
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--hair);
+  border-block:1px solid var(--hair);grid-template-columns:1fr}
+.flow li{background:var(--paper);padding:clamp(20px,2.2vw,32px)}
+.flow span{display:block;font-size:var(--fs-xs);letter-spacing:.14em;color:var(--hair);margin-bottom:14px}
+.flow h4{margin:0;font-weight:400;font-size:var(--fs-md);letter-spacing:-.02em}
+.flow p{margin:9px 0 0;font-size:var(--fs-sm);line-height:1.5;color:var(--ink-60)}
+/* --- pos-baukasten --- */
+.pos-grid{list-style:none;margin:0;padding:0;display:grid;gap:clamp(16px,2vw,30px);
+  grid-template-columns:repeat(2,minmax(0,1fr))}
+.pos-card figure{margin:0 0 clamp(12px,1.4vw,18px)}
+.pos-card img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+.pos-ph{position:relative;aspect-ratio:4/5;border-radius:2px;display:grid;place-items:center;
+  background:linear-gradient(150deg,var(--a) 0%,var(--b) 100%)}
+.pos-ph::after,.fr-ph::after{content:"";position:absolute;inset:0;border-radius:inherit;background:rgba(255,255,255,.66)}
+.pos-ph span,.fr-ph span{position:relative;z-index:1}
+.pos-ph span{font-size:var(--fs-xs);color:rgba(11,11,10,.45);letter-spacing:.06em}
+.pos-card h3{margin:0;font-weight:400;font-size:var(--fs-md);letter-spacing:-.02em}
+.pos-s{margin:6px 0 0;font-size:var(--fs-sm);color:var(--ink-38)}
+.pos-d{margin:12px 0 0;font-size:var(--fs-sm);line-height:1.55;color:var(--ink-60)}
+.starter{margin-top:clamp(34px,4vw,64px);padding-top:clamp(26px,3vw,44px);border-top:1px solid var(--hair);
+  display:grid;gap:clamp(20px,2.6vw,44px);grid-template-columns:1fr}
+.starter-list{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--hair);
+  border-block:1px solid var(--hair);grid-template-columns:1fr}
+.starter-list li{background:var(--paper);padding:15px 0 15px 0;display:flex;gap:12px;align-items:baseline;
+  font-size:var(--fs-sm);padding-inline:clamp(0px,1vw,14px)}
+.starter-list span{font-size:var(--fs-xs);color:var(--hair);flex:none}
+/* ---------- partner & investor ---------- */
+.pi{display:grid;gap:clamp(20px,3vw,52px);grid-template-columns:1fr;padding:clamp(26px,3vw,44px) 0;
+  border-block:1px solid var(--hair)}
+.pi-p{margin:14px 0 0;font-size:var(--fs-sm);line-height:1.6;color:var(--ink-60);max-width:52ch}
+.pi-cta{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.pi-note{margin:0;font-size:var(--fs-xs);line-height:1.6;color:var(--ink-38);max-width:46ch}
+/* ---------- einzelfoto im fließtext ---------- */
+.fotostill{padding:clamp(30px,4vw,58px) 0}
+.fs-in{display:grid;gap:clamp(18px,3vw,44px);grid-template-columns:1fr;align-items:end}
+.fs-fig{margin:0;width:100%;max-width:440px}
+.fs-fig img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+.fs-txt{padding-bottom:clamp(2px,1vw,14px)}
+.fs-cap{margin:0;font-size:var(--fs-md);letter-spacing:-.02em;line-height:1.35;max-width:24ch}
+.fs-sub{margin:12px 0 0;font-size:var(--fs-sm);line-height:1.55;color:var(--ink-60);max-width:42ch}
+.fs-ki{margin:16px 0 0;font-size:var(--fs-xs);color:var(--ink-38);letter-spacing:.04em}
+/* ---------- bildwelt (betriebe) ---------- */
+.bw-grid{list-style:none;margin:0;padding:0;display:grid;gap:clamp(16px,2vw,30px);
+  grid-template-columns:repeat(2,minmax(0,1fr))}
+.bw-card figure{margin:0 0 clamp(10px,1.2vw,16px);position:relative}
+.bw-card img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+.bw-n{position:absolute;top:8px;left:8px;font-size:var(--fs-xs);letter-spacing:.06em;
+  background:rgba(255,255,255,.88);color:var(--ink-60);padding:3px 7px;border-radius:2px}
+.bw-card h3{margin:0;font-weight:400;font-size:var(--fs-sm);letter-spacing:-.01em}
+.bw-s{margin:5px 0 0;font-size:var(--fs-xs);color:var(--ink-38)}
+.stand-cat{font-size:var(--fs-xs)!important;font-weight:400!important;letter-spacing:.14em!important;
+  text-transform:uppercase;color:var(--ink-38);margin-bottom:14px!important;max-width:none!important}
 </style>
 
 
@@ -758,24 +920,18 @@ body.lb-open{overflow:hidden}
   <section class="band" id="beweis" style="padding-top:0">
     <div class="wrap">
       <div class="band-head">
-        <h2 class="h2" id="sugarHead">eine limonade hat siebzigmal so viel zucker.</h2>
+        <h2 class="h2" id="sugarHead">eine limonade hat 70x so viel zucker.</h2>
         <p class="sub">alle werte je 0,33-l-dose. bei raaaw ist nichts zugesetzt — der zucker steckt in der frucht.</p>
       </div>
 
-      <div class="chart" role="img" aria-label="Zucker je 0,33 Liter, absteigend: herkömmliche Limonade 18 bis 24 Gramm, raaaw pink grapefruit 1,7 Gramm, raaaw zitrone, himbeer-limette und limette je 0,3 Gramm. Die gesetzliche Grenze für die Angabe zuckerfrei liegt bei 0,5 Gramm je 100 Milliliter, also 1,65 Gramm je Dose.">
-        <div class="chart-head">
-          <p class="chart-axis">zucker je 0,33 l</p>
-          <p class="chart-key"><i aria-hidden="true"></i>grenze für „zuckerfrei" · 0,5 g je 100 ml</p>
+      <div role="img" aria-label="Zucker je 0,33-Liter-Dose: herkömmliche Limonade 18 bis 24 Gramm, raaaw 0,3 Gramm." style="display:grid;gap:2px;margin-top:clamp(22px,3vw,34px)">
+        <div style="display:grid;gap:10px;padding:18px 0;border-top:1px solid #E7E7E0">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;font-size:15px"><span>herkömmliche limonade</span><span class="num" style="font-weight:200;font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.03em">18–24 g</span></div>
+          <div style="height:10px;background:#E4536E;width:100%"></div>
         </div>
-        <div class="cols-wrap">
-          <span class="limit" aria-hidden="true"><i></i></span>
-          <ol class="cols">
-            <li class="col is-ref" style="--v:21"><span class="col-val num">18–24 g</span><span class="col-bar"></span><span class="col-name">herkömmliche<br>limonade</span></li>
-            <li class="col is-us" style="--v:1.7"><span class="col-val num">1,7 g</span><span class="col-bar"></span><span class="col-name">raaaw<br>pink grapefruit</span></li>
-            <li class="col is-us" style="--v:0.3"><span class="col-val num">0,3 g</span><span class="col-bar"></span><span class="col-name">raaaw<br>zitrone</span></li>
-            <li class="col is-us" style="--v:0.3"><span class="col-val num">0,3 g</span><span class="col-bar"></span><span class="col-name">raaaw<br>himbeer-limette</span></li>
-            <li class="col is-us" style="--v:0.3"><span class="col-val num">0,3 g</span><span class="col-bar"></span><span class="col-name">raaaw<br>limette</span></li>
-          </ol>
+        <div style="display:grid;gap:10px;padding:18px 0;border-top:1px solid #E7E7E0;border-bottom:1px solid #E7E7E0">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;font-size:15px"><span>raaaw, je 0,33-l-dose</span><span class="num" style="font-weight:200;font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.03em">0,3 g</span></div>
+          <div style="height:10px;background:#0B0B0A;width:1.5%;min-width:6px"></div>
         </div>
       </div>
 
@@ -1014,6 +1170,92 @@ body.lb-open{overflow:hidden}
         <p>nur das, was der körper wirklich braucht. ein klarer moment im alltagschaos — für alle, die wissen: weniger ist manchmal verdammt viel mehr.</p>
       </div>
       <p class="bleed-claim">einfach erfrischend.<br>irritierend ehrlich.</p>
+    </div>
+  </section>
+
+  <section class="band" id="weiche" style="padding-top:0">
+    <div class="wrap">
+      <div class="band-head">
+        <h2 class="h2">drei wege weiter.</h2>
+        <p class="sub">je nachdem, warum du hier bist.</p>
+      </div>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:26px">
+        <li style="border-top:1px solid #0B0B0A;padding:18px 0 0"><span style="display:block;font-size:12px;letter-spacing:0.04em;opacity:0.45">für dich</span><b style="display:block;margin-top:8px;font-weight:400;font-size:22px;letter-spacing:-0.03em">probieren und bestellen</b><span style="display:block;margin-top:10px;font-size:14px;line-height:1.55;opacity:0.65">vier sorten, versandkostenfrei in deutschland, in 1–4 tagen da.</span><button class="btn" type="button" data-go="sorten" style="margin-top:16px">zu den sorten →</button></li>
+        <li style="border-top:1px solid #0B0B0A;padding:18px 0 0"><span style="display:block;font-size:12px;letter-spacing:0.04em;opacity:0.45">für den handel</span><b style="display:block;margin-top:8px;font-weight:400;font-size:22px;letter-spacing:-0.03em">listen und ausschenken</b><span style="display:block;margin-top:10px;font-size:14px;line-height:1.55;opacity:0.65">24er tray, pos-material, konditionen. über 250 verkaufsstellen in deutschland.</span><button class="btn" type="button" data-go="b2b" style="margin-top:16px">zum händlerbereich →</button></li>
+        <li style="border-top:1px solid #0B0B0A;padding:18px 0 0"><span style="display:block;font-size:12px;letter-spacing:0.04em;opacity:0.45">für presse, partner &amp; investoren</span><b style="display:block;margin-top:8px;font-weight:400;font-size:22px;letter-spacing:-0.03em">marke und zahlen</b><span style="display:block;margin-top:10px;font-size:14px;line-height:1.55;opacity:0.65">herkunft, wachstum, presse — und gespräche über kooperation und beteiligung.</span><button class="btn" type="button" data-go="b2b" style="margin-top:16px">zu den zahlen →</button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="kategorie">
+    <div class="wrap">
+      <h2 class="h2 cat-h">nicht limo. nicht wasser plus.</h2>
+      <ul class="nolist" aria-label="Was nicht drin ist">
+        <li><span>aroma</span></li>
+        <li><span>konzentrat</span></li>
+        <li><span>süßstoff</span></li>
+        <li><span>zuckerzusatz</span></li>
+      </ul>
+      <p class="label yes-lab">was stattdessen drin ist</p>
+      <ul class="yeslist" aria-label="Was drin ist">
+        <li>frisch gepresster bio-direktsaft</li>
+        <li>zestenextrakt aus der schale</li>
+        <li>mineralwasser, feinperlig</li>
+        <li>100 % bio-zertifiziert</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="perl">
+        <div class="perl-txt">
+          <h3 class="h3">feinperlig, nicht spritzig.</h3>
+          <p>weniger perlage, weniger druck im magen. man trinkt die dose aus, statt sie sich einzuteilen.</p>
+        </div>
+        <ul class="perl-scale" aria-label="Einordnung der Kohlensäure">
+          <li><span>still</span></li>
+          <li class="is-us"><b>raaaw</b><span>feinperlig</span></li>
+          <li><span>medium</span></li>
+          <li><span>classic</span></li>
+          <li><span>limonade</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="prozess" style="padding-top:0">
+    <div class="wrap">
+      <div class="band-head">
+        <h2 class="h2">vom baum in die dose. fünf schritte.</h2>
+        <p class="sub">keiner davon heißt „aroma zugeben". was dazukommt, steht auf der dose.</p>
+      </div>
+      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:22px">
+        <li style="border-top:1px solid #0B0B0A;padding:16px 0 0"><span style="display:block;font-size:12px;letter-spacing:0.04em;opacity:0.45">01</span><b style="display:block;margin-top:8px;font-weight:400;font-size:19px;letter-spacing:-0.02em">ernten</b><span style="display:block;margin-top:10px;font-size:14px;line-height:1.55;opacity:0.65">von hand, in der reifezeit. keine nachreifung im lager, keine wachsschicht.</span></li>
+        <li style="border-top:1px solid #0B0B0A;padding:16px 0 0"><span style="display:block;font-size:12px;letter-spacing:0.04em;opacity:0.45">02</span><b style="display:block;margin-top:8px;font-weight:400;font-size:19px;letter-spacing:-0.02em">pressen</b><span style="display:block;margin-top:10px;font-size:14px;line-height:1.55;opacity:0.65">innerhalb weniger stunden, samt der zestenöle aus der schale. kalt, ohne erhitzen.</span></li>
+        <li style="border-top:1px solid #0B0B0A;padding:16px 0 0"><span style="display:block;font-size:12px;letter-spacing:0.04em;opacity:0.45">03</span><b style="display:block;margin-top:8px;font-weight:400;font-size:19px;letter-spacing:-0.02em">mischen</b><span style="display:block;margin-top:10px;font-size:14px;line-height:1.55;opacity:0.65">direktsaft und zestenextrakt ins mineralwasser. kein konzentrat, kein rückverdünnen.</span></li>
+        <li style="border-top:1px solid #0B0B0A;padding:16px 0 0"><span style="display:block;font-size:12px;letter-spacing:0.04em;opacity:0.45">04</span><b style="display:block;margin-top:8px;font-weight:400;font-size:19px;letter-spacing:-0.02em">karbonisieren</b><span style="display:block;margin-top:10px;font-size:14px;line-height:1.55;opacity:0.65">fein statt spritzig. so bleibt die frucht vorn und der magen ruhig.</span></li>
+        <li style="border-top:1px solid #0B0B0A;padding:16px 0 0"><span style="display:block;font-size:12px;letter-spacing:0.04em;opacity:0.45">05</span><b style="display:block;margin-top:8px;font-weight:400;font-size:19px;letter-spacing:-0.02em">abfüllen</b><span style="display:block;margin-top:10px;font-size:14px;line-height:1.55;opacity:0.65">in europa, chargenweise dokumentiert. der code auf der dose führt zu genau dieser charge.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="partner" style="padding-top:0">
+    <div class="wrap">
+      <div class="pi">
+        <div>
+          <p class="label">für partner, distributoren und investoren</p>
+          <h2 class="h2">partner und investor werden.</h2>
+          <p class="pi-p">raaaw wächst über den handel, die gastronomie und studios. wer uns listen,
+          distribuieren oder begleiten möchte, bekommt zahlen, sortiment und konditionen an einer
+          stelle — ohne umweg über den shop.</p>
+        </div>
+        <div class="pi-cta">
+          <button class="btn btn-dark" type="button" data-go="b2b">partner und investor werden →</button>
+          <p class="pi-note">produktblatt, bestellschein und die aktuellen zahlen schicken wir direkt.
+          keine listungsgebühr, keine mindestlaufzeit.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1586,7 +1828,7 @@ body.lb-open{overflow:hidden}
     "alle sorten, sechs dosen":"every flavour, six cans","4,8 von 5 im shop bewertet":"rated 4.8 out of 5 in the shop",
     "europas erstes bio-sprudelwasser mit echter gepresster frucht. ohne zucker, ohne zusätze.":"europe’s first organic sparkling water with real squeezed fruit. no sugar, no additives.",
     
-    "eine limonade hat siebzigmal so viel zucker.":"a soda has seventy times as much sugar.",
+    "eine limonade hat 70x so viel zucker.":"a soda has 70x as much sugar.",
     "alle werte je 0,33-l-dose. bei raaaw ist nichts zugesetzt — der zucker steckt in der frucht.":"all values per 0.33 l can. nothing is added to raaaw — the sugar sits in the fruit.",
     "zucker je 0,33 l":"sugar per 0.33 l","herkömmliche<br>limonade":"conventional<br>soda",
     "grenze für „zuckerfrei\" · 0,5 g je 100 ml":"limit for “sugar-free” · 0.5 g per 100 ml",
