@@ -56,6 +56,16 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 .rw-clip-buy a{flex:none;min-height:36px;padding:0 16px;border:1px solid rgba(11,11,10,0.16);border-radius:999px;
   display:flex;align-items:center;font-size:13px}
 .rw-clip-buy a:hover{border-color:#0B0B0A}
+
+.rw-benefits li{display:flex;align-items:center}
+.rw-cta-big{font-size:clamp(16px,1.8vw,21px);letter-spacing:-0.02em;white-space:nowrap}
+.rw-press{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;
+  overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
+.rw-press::-webkit-scrollbar{display:none}
+.rw-press img{height:clamp(22px,2.4vw,36px)!important;width:auto;flex:0 0 auto}
+@media (min-width:900px){
+  .rw-buywrap{justify-content:center;margin-left:calc(50% + clamp(12px,2vw,32px))}
+}
 </style>
 </helmet>
 
@@ -74,7 +84,6 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 
 <sc-if value="{{ isShop }}" hint-placeholder-val="{{ true }}">
 <main data-screen-label="shop">
-
   <section style="position:relative;padding:clamp(28px,3.4vw,52px) clamp(18px,3vw,44px) clamp(40px,5vw,80px);min-height:clamp(560px,82vh,940px);display:flex;flex-direction:column;transition:background 600ms ease;background:{{ heroWash }}">
     <div>
       <p style="margin:0;font-size:13px;letter-spacing:-0.01em;color:rgba(11,11,10,0.5)">wähle eine sorte <span style="color:rgba(11,11,10,0.35)">— wischen für mehr</span></p>
@@ -129,51 +138,9 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
     <li style="background:#FCFCFA;padding:clamp(14px,2vw,26px) clamp(18px,3vw,32px);font-size:14px;color:rgba(11,11,10,0.62)">versandkostenfrei ab der ersten dose</li>
   </ul>
 
-  <section id="stimmen" style="padding:clamp(44px,5.5vw,96px) clamp(18px,3vw,44px) 0">
-    <div style="max-width:1560px;margin:0 auto">
-      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(16px,2.6vw,40px)">
-        <span style="font-weight:200;font-size:clamp(3.4rem,7vw,6rem);line-height:0.9;letter-spacing:-0.05em">4,8</span>
-        <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(11,11,10,0.55);max-width:30ch">★★★★★ aus 40 bewertungen im shop. der erste schluck irritiert, der zweite überzeugt.</p>
-      </div>
-
-      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(80vw,280px),1fr);gap:1px;margin-top:clamp(24px,3.4vw,52px);background:#E7E7E0;border-top:1px solid #0B0B0A;border-bottom:1px solid #0B0B0A;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none">
-        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
-          <blockquote style="margin:0;padding:clamp(22px,2.6vw,36px);background:#FCFCFA;display:flex;flex-direction:column;gap:16px;scroll-snap-align:start">
-            <p style="margin:0;font-size:14px;letter-spacing:0.14em;color:#0B0B0A" aria-label="fünf von fünf sternen">★★★★★</p>
-            <p style="margin:0;font-weight:200;font-size:clamp(1.1rem,1.6vw,1.4rem);line-height:1.35;letter-spacing:-0.02em">{{ r.t }}</p>
-            <footer style="margin-top:auto;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">{{ r.n }} · verifizierter kauf</footer>
-          </blockquote>
-        </sc-for>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(16px,4vw,80px);margin-top:clamp(32px,4.5vw,80px)">
-        <h2 style="margin:0;font-weight:200;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.06;letter-spacing:-0.04em;max-width:18ch">auf der straße gefragt, nicht behauptet.</h2>
-        <p style="margin:0;font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:rgba(11,11,10,0.6);max-width:46ch">münchen, ein nachmittag, kein skript: dose auf, probieren, sagen was man denkt. der erste schluck ist bei allen der gleiche moment.</p>
-      </div>
-
-      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(72vw,300px),1fr);gap:clamp(14px,2vw,24px);margin-top:clamp(20px,3vw,44px);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain">
-        <sc-for list="{{ clips }}" as="c" hint-placeholder-count="5">
-          <figure style="margin:0;scroll-snap-align:start;background:#FCFCFA;display:flex;flex-direction:column">
-            <button type="button" class="rw-clip" aria-label="clip abspielen: {{ c.cap }}">
-              <video class="rw-clip-vid" src="{{ c.vid }}" poster="{{ c.pos }}" playsinline loop muted preload="metadata"></video>
-              <span class="rw-clip-play" aria-hidden="true"></span>
-              <span class="rw-clip-cap">{{ c.cap }}</span>
-            </button>
-            <figcaption class="rw-clip-buy">
-              <img src="{{ c.can }}" alt="" aria-hidden="true">
-              <span><b>{{ c.sorte }}</b><i>2,24 € je dose</i></span>
-              <a href="#kaufen">kaufen</a>
-            </figcaption>
-          </figure>
-        </sc-for>
-      </div>
-    </div>
-  </section>
-
   <section style="padding:clamp(64px,9vw,150px) clamp(18px,3vw,44px);background:#0B0B0A;color:#FCFCFA">
     <div style="max-width:1560px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(28px,5vw,90px);align-items:end">
       <div>
-        <p style="margin:0;font-size:12px;letter-spacing:0.04em;color:rgba(252,252,250,0.45)">das narrativ</p>
         <h2 style="margin:clamp(20px,2.6vw,34px) 0 0;font-weight:200;font-size:clamp(2.2rem,5.4vw,4.6rem);line-height:1.02;letter-spacing:-0.045em">wie befreien wir uns vom zuviel?</h2>
       </div>
       <div style="max-width:52ch">
@@ -212,6 +179,75 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
           </li>
         </sc-for>
       </ol>
+    </div>
+  </section>
+
+  <section id="stimmen-videos" style="padding:clamp(44px,5.5vw,96px) clamp(18px,3vw,44px) 0">
+    <div style="max-width:1560px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(16px,4vw,80px);margin-top:clamp(32px,4.5vw,80px)">
+        <h2 style="margin:0;font-weight:200;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.06;letter-spacing:-0.04em;max-width:18ch">auf der straße gefragt, nicht behauptet.</h2>
+        <p style="margin:0;font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:rgba(11,11,10,0.6);max-width:46ch">münchen, ein nachmittag, kein skript: dose auf, probieren, sagen was man denkt. der erste schluck ist bei allen der gleiche moment.</p>
+      </div>
+
+      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(72vw,300px),1fr);gap:clamp(14px,2vw,24px);margin-top:clamp(20px,3vw,44px);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain">
+        <sc-for list="{{ clips }}" as="c" hint-placeholder-count="5">
+          <figure style="margin:0;scroll-snap-align:start;background:#FCFCFA;display:flex;flex-direction:column">
+            <button type="button" class="rw-clip" aria-label="clip abspielen: {{ c.cap }}">
+              <video class="rw-clip-vid" src="{{ c.vid }}" poster="{{ c.pos }}" playsinline loop muted preload="metadata"></video>
+              <span class="rw-clip-play" aria-hidden="true"></span>
+              <span class="rw-clip-cap">{{ c.cap }}</span>
+            </button>
+            <figcaption class="rw-clip-buy">
+              <img src="{{ c.can }}" alt="" aria-hidden="true">
+              <span><b>{{ c.sorte }}</b><i>2,24 € je dose</i></span>
+              <a href="#kaufen">kaufen</a>
+            </figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="sorten" style="padding:clamp(44px,5.5vw,96px) clamp(18px,3vw,44px) 0">
+    <div style="max-width:1560px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(16px,4vw,80px)">
+        <h2 style="margin:0;font-weight:200;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.06;letter-spacing:-0.04em;max-width:16ch">vier sorten. eine haltung.</h2>
+        <p style="margin:0;font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:rgba(11,11,10,0.55);max-width:44ch">jede sorte bekommt ihre frucht von dort, wo sie hingehört. gleiche rezeptur, gleicher verzicht: kein aroma, kein konzentrat, kein süßstoff.</p>
+      </div>
+      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(64vw,260px),1fr);gap:clamp(14px,2vw,28px);margin-top:clamp(24px,3.4vw,52px);overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain;padding-bottom:6px">
+        <article style="scroll-snap-align:start;display:flex;flex-direction:column;gap:14px">
+          <div style="aspect-ratio:4/5;background:#F3F3EE;display:flex;align-items:center;justify-content:center;padding:clamp(16px,2vw,30px)"><img src="/c/assets/can/zitrone.webp" alt="bio-zitrone" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+          <div>
+            <p style="margin:0;font-size:17px;letter-spacing:-0.02em">bio-zitrone</p>
+            <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">siracusa, sizilien</p>
+            <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:rgba(11,11,10,0.6)">3 % bio-direktsaft und zestenextrakt</p>
+          </div>
+        </article>
+        <article style="scroll-snap-align:start;display:flex;flex-direction:column;gap:14px">
+          <div style="aspect-ratio:4/5;background:#F3F3EE;display:flex;align-items:center;justify-content:center;padding:clamp(16px,2vw,30px)"><img src="/c/assets/can/grapefruit.webp" alt="bio pink grapefruit" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+          <div>
+            <p style="margin:0;font-size:17px;letter-spacing:-0.02em">bio pink grapefruit</p>
+            <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">sizilien</p>
+            <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:rgba(11,11,10,0.6)">7 % bio-direktsaft, farbe aus bio-hibiskus</p>
+          </div>
+        </article>
+        <article style="scroll-snap-align:start;display:flex;flex-direction:column;gap:14px">
+          <div style="aspect-ratio:4/5;background:#F3F3EE;display:flex;align-items:center;justify-content:center;padding:clamp(16px,2vw,30px)"><img src="/c/assets/can/himbeere.webp" alt="bio himbeere &amp; limette" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+          <div>
+            <p style="margin:0;font-size:17px;letter-spacing:-0.02em">bio himbeere &amp; limette</p>
+            <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">serbien · brasilien</p>
+            <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:rgba(11,11,10,0.6)">püree statt konzentrat, naturtrüb</p>
+          </div>
+        </article>
+        <article style="scroll-snap-align:start;display:flex;flex-direction:column;gap:14px">
+          <div style="aspect-ratio:4/5;background:#F3F3EE;display:flex;align-items:center;justify-content:center;padding:clamp(16px,2vw,30px)"><span style="font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.4)">bald verfügbar</span></div>
+          <div>
+            <p style="margin:0;font-size:17px;letter-spacing:-0.02em">bio-limette</p>
+            <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">brasilien</p>
+            <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:rgba(11,11,10,0.6)">3 % bio-direktsaft — kommt als vierte sorte dazu</p>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -280,62 +316,20 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
     </div>
   </section>
 
-  <section id="herkunft" style="padding:clamp(56px,7vw,120px) clamp(18px,3vw,44px) 0">
+  <section id="stimmen" style="padding:clamp(44px,5.5vw,96px) clamp(18px,3vw,44px) 0">
     <div style="max-width:1560px;margin:0 auto">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(20px,4vw,80px)">
-        <h2 style="margin:0;font-weight:200;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.06;letter-spacing:-0.04em;max-width:18ch">jede frucht hat eine adresse.<span style="display:block;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.4);margin-top:14px">wischen für alle vier</span></h2>
-        <p style="margin:0;font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:rgba(11,11,10,0.6);max-width:46ch">mineralwasser aus österreich, frucht von dort, wo sie hingehört. gepflückt, innerhalb weniger stunden gepresst, einzeln dokumentiert — für jede sorte getrennt.</p>
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(16px,2.6vw,40px)">
+        <span style="font-weight:200;font-size:clamp(3.4rem,7vw,6rem);line-height:0.9;letter-spacing:-0.05em">4,8</span>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(11,11,10,0.55);max-width:30ch">★★★★★ aus 40 bewertungen im shop. der erste schluck irritiert, der zweite überzeugt.</p>
       </div>
 
-      <figure style="margin:clamp(28px,4vw,60px) 0 0;position:relative;width:100%;aspect-ratio:21/9;display:flex;align-items:flex-end;overflow:hidden;background:#EDEDE6"><img src="/c/assets/img/60.webp" alt="ernte in siracusa" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
-        <figcaption style="padding:clamp(18px,2.4vw,32px);font-size:12px;line-height:1.7;letter-spacing:0.02em;color:rgba(11,11,10,0.5)">
-          <span style="color:#FCFCFA;text-shadow:0 1px 12px rgba(0,0,0,0.55)">siracusa, sizilien — von hand gepflückt, innerhalb weniger stunden gepresst<br><span style="opacity:0.75">ki-generiertes motiv, platzhalter bis zum shooting</span></span>
-        </figcaption>
-      </figure>
-
-      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(74vw,240px),1fr);gap:clamp(16px,2.4vw,34px);margin-top:clamp(28px,4vw,56px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none;padding-bottom:4px">
-        <sc-for list="{{ origins }}" as="o" hint-placeholder-count="4">
-          <figure style="margin:0;scroll-snap-align:start">
-            <div style="width:100%;aspect-ratio:4/5;overflow:hidden;background:#EDEDE6"><img src="{{ o.img }}" alt="{{ o.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-            <figcaption style="padding-top:14px;border-top:1px solid #E7E7E0;margin-top:14px">
-              <p style="margin:0;font-size:17px;letter-spacing:-0.02em">{{ o.title }}</p>
-              <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">{{ o.place }}</p>
-              <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:rgba(11,11,10,0.6)">{{ o.body }}</p>
-            </figcaption>
-          </figure>
-        </sc-for>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(20px,3vw,56px);align-items:center;margin-top:clamp(36px,5vw,72px);padding-top:clamp(28px,3.4vw,44px);border-top:1px solid #0B0B0A">
-        <div style="aspect-ratio:1;max-width:260px;overflow:hidden;background:#EDEDE6"><img src="/c/assets/img/65.webp" alt="rückseite der dose mit chargen-code" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-        <div>
-          <h3 style="margin:0;font-weight:200;font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.1;letter-spacing:-0.035em;max-width:24ch">der code auf der dose führt zu deiner charge.</h3>
-          <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:rgba(11,11,10,0.6);max-width:50ch">laborwerte, hain und erntewoche, pressung und abfüllung — nicht der durchschnitt über alle chargen. deine.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="kultur" style="padding:clamp(56px,7vw,120px) clamp(18px,3vw,44px) 0">
-    <div style="max-width:1560px;margin:0 auto">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,4vw,80px)">
-        <h2 style="margin:0;font-weight:200;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.06;letter-spacing:-0.04em;max-width:16ch">da steht raaaw schon.</h2>
-        <p style="margin:0;font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:rgba(11,11,10,0.6);max-width:46ch">in pilates- und yogastudios, in cafés, in büros. über 250 orte in deutschland — dort, wo man ohnehin darauf achtet, was man trinkt.</p>
-      </div>
-
-      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(74vw,260px),1fr);gap:clamp(14px,2vw,24px);margin-top:clamp(24px,3vw,44px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none;padding-bottom:4px">
-        <sc-for list="{{ places }}" as="p" hint-placeholder-count="3">
-          <figure style="margin:0;scroll-snap-align:start">
-            <div style="width:100%;aspect-ratio:4/5;overflow:hidden;background:#EDEDE6"><img src="{{ p.img }}" alt="{{ p.cap }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-            <figcaption style="margin-top:12px;font-size:14px;color:rgba(11,11,10,0.55)">{{ p.cap }}</figcaption>
-          </figure>
-        </sc-for>
-      </div>
-
-      <p style="margin:clamp(44px,6vw,90px) 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">darüber haben geschrieben</p>
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,4vw,60px);margin-top:22px;padding-top:22px;border-top:1px solid #E7E7E0;opacity:0.75">
-        <sc-for list="{{ press }}" as="p" hint-placeholder-count="5">
-          <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="height:30px;width:auto;flex:none">
+      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(80vw,280px),1fr);gap:1px;margin-top:clamp(24px,3.4vw,52px);background:#E7E7E0;border-top:1px solid #0B0B0A;border-bottom:1px solid #0B0B0A;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+          <blockquote style="margin:0;padding:clamp(22px,2.6vw,36px);background:#FCFCFA;display:flex;flex-direction:column;gap:16px;scroll-snap-align:start">
+            <p style="margin:0;font-size:14px;letter-spacing:0.14em;color:#0B0B0A" aria-label="fünf von fünf sternen">★★★★★</p>
+            <p style="margin:0;font-weight:200;font-size:clamp(1.1rem,1.6vw,1.4rem);line-height:1.35;letter-spacing:-0.02em">{{ r.t }}</p>
+            <footer style="margin-top:auto;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">{{ r.n }} · verifizierter kauf</footer>
+          </blockquote>
         </sc-for>
       </div>
     </div>
@@ -374,6 +368,78 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
     </div>
   </section>
 
+  <section id="herkunft" style="padding:clamp(56px,7vw,120px) clamp(18px,3vw,44px) 0">
+    <div style="max-width:1560px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(20px,4vw,80px)">
+        <h2 style="margin:0;font-weight:200;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.06;letter-spacing:-0.04em;max-width:18ch">jede frucht hat eine adresse.<span style="display:block;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.4);margin-top:14px">wischen für alle vier</span></h2>
+        <p style="margin:0;font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:rgba(11,11,10,0.6);max-width:46ch">mineralwasser aus österreich, frucht von dort, wo sie hingehört. gepflückt, innerhalb weniger stunden gepresst, einzeln dokumentiert — für jede sorte getrennt.</p>
+      </div>
+
+      <figure style="margin:clamp(28px,4vw,60px) 0 0;position:relative;width:100%;aspect-ratio:21/9;display:flex;align-items:flex-end;overflow:hidden;background:#EDEDE6"><img src="/c/assets/img/60.webp" alt="ernte in siracusa" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+        <figcaption style="padding:clamp(18px,2.4vw,32px);font-size:12px;line-height:1.7;letter-spacing:0.02em;color:rgba(11,11,10,0.5)">
+          <span style="color:#FCFCFA;text-shadow:0 1px 12px rgba(0,0,0,0.55)">siracusa, sizilien — von hand gepflückt, innerhalb weniger stunden gepresst<br><span style="opacity:0.75">ki-generiertes motiv, platzhalter bis zum shooting</span></span>
+        </figcaption>
+      </figure>
+
+      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(74vw,240px),1fr);gap:clamp(16px,2.4vw,34px);margin-top:clamp(28px,4vw,56px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none;padding-bottom:4px">
+        <sc-for list="{{ origins }}" as="o" hint-placeholder-count="4">
+          <figure style="margin:0;scroll-snap-align:start">
+            <div style="width:100%;aspect-ratio:4/5;overflow:hidden;background:#EDEDE6"><img src="{{ o.img }}" alt="{{ o.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+            <figcaption style="padding-top:14px;border-top:1px solid #E7E7E0;margin-top:14px">
+              <p style="margin:0;font-size:17px;letter-spacing:-0.02em">{{ o.title }}</p>
+              <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">{{ o.place }}</p>
+              <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:rgba(11,11,10,0.6)">{{ o.body }}</p>
+            </figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="charge" style="padding:clamp(44px,5.5vw,96px) clamp(18px,3vw,44px) 0">
+    <div style="max-width:1560px;margin:0 auto">
+  
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(20px,3vw,56px);align-items:center;margin-top:clamp(36px,5vw,72px);padding-top:clamp(28px,3.4vw,44px);border-top:1px solid #0B0B0A">
+        <div style="aspect-ratio:4/5;width:100%;overflow:hidden;background:#EDEDE6"><img src="/c/assets/img/65.webp" alt="rückseite der dose mit chargen-code" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div>
+          <h3 style="margin:0;font-weight:200;font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.1;letter-spacing:-0.035em;max-width:24ch">der code auf der dose führt zu deiner charge.</h3>
+          <p style="margin:14px 0 0;font-size:15px;line-height:1.6;color:rgba(11,11,10,0.6);max-width:50ch">laborwerte, hain und erntewoche, pressung und abfüllung — nicht der durchschnitt über alle chargen. deine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kultur" style="padding:clamp(56px,7vw,120px) clamp(18px,3vw,44px) 0">
+    <div style="max-width:1560px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,4vw,80px)">
+        <h2 style="margin:0;font-weight:200;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.06;letter-spacing:-0.04em;max-width:16ch">da steht raaaw schon.</h2>
+        <p style="margin:0;font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:rgba(11,11,10,0.6);max-width:46ch">in pilates- und yogastudios, in cafés, in büros. über 250 orte in deutschland — dort, wo man ohnehin darauf achtet, was man trinkt.</p>
+      </div>
+
+      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(74vw,260px),1fr);gap:clamp(14px,2vw,24px);margin-top:clamp(24px,3vw,44px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none;padding-bottom:4px">
+        <sc-for list="{{ places }}" as="p" hint-placeholder-count="3">
+          <figure style="margin:0;scroll-snap-align:start">
+            <div style="width:100%;aspect-ratio:4/5;overflow:hidden;background:#EDEDE6"><img src="{{ p.img }}" alt="{{ p.cap }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+            <figcaption style="margin-top:12px;font-size:14px;color:rgba(11,11,10,0.55)">{{ p.cap }}</figcaption>
+          </figure>
+        </sc-for>
+      </div>
+
+      <p style="margin:clamp(44px,6vw,90px) 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">darüber haben geschrieben</p>
+    </div>
+  </section>
+
+  <section id="presse" style="padding:clamp(44px,5.5vw,96px) clamp(18px,3vw,44px) 0">
+    <div style="max-width:1560px;margin:0 auto">
+  
+      <div class="rw-press" style="gap:clamp(28px,4vw,60px);margin-top:22px;padding-top:22px;border-top:1px solid #E7E7E0;opacity:0.75">
+        <sc-for list="{{ press }}" as="p" hint-placeholder-count="5">
+          <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="height:30px;width:auto;flex:none">
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
   <section style="padding:clamp(56px,7vw,110px) clamp(18px,3vw,44px) 0">
     <div style="max-width:1560px;margin:0 auto">
       <h2 style="margin:0;font-weight:200;font-size:clamp(2rem,4.4vw,3.8rem);line-height:1;letter-spacing:-0.045em;max-width:18ch">was ihr uns am häufigsten fragt.</h2>
@@ -409,7 +475,7 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
     <div style="max-width:1560px;margin:0 auto">
       <button type="button" onClick="{{ goB2B }}" style="width:100%;background:none;border:0;padding:clamp(24px,3vw,44px) 0;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px;text-align:left;border-bottom:1px solid #E7E7E0" style-hover="opacity:0.6">
         <span style="font-weight:200;font-size:clamp(1.5rem,2.6vw,2.2rem);letter-spacing:-0.035em;max-width:26ch">sie wollen raaaw verkaufen, ausschenken oder begleiten?</span>
-        <span style="font-size:12px;letter-spacing:0.04em">händler & partner →</span>
+        <span class="rw-cta-big">händler & partner →</span>
       </button>
     </div>
   </section>
