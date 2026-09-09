@@ -765,7 +765,7 @@ body.lb-open{overflow:hidden}
 .fs-cap{margin:0;font-size:var(--fs-md);letter-spacing:-.02em;line-height:1.35;max-width:24ch}
 .fs-sub{margin:12px 0 0;font-size:var(--fs-sm);line-height:1.55;color:var(--ink-60);max-width:42ch}
 .fs-ki{margin:16px 0 0;font-size:var(--fs-xs);color:var(--ink-38);letter-spacing:.04em}
-/* ---------- bildwelt (betriebe) ---------- */
+/* ---------- bildwelt (händler) ---------- */
 .bw-grid{list-style:none;margin:0;padding:0;display:grid;gap:clamp(16px,2vw,30px);
   grid-template-columns:repeat(2,minmax(0,1fr))}
 .bw-card figure{margin:0 0 clamp(10px,1.2vw,16px);position:relative}
@@ -785,7 +785,28 @@ body.lb-open{overflow:hidden}
 .alltag-grid::-webkit-scrollbar{display:none}
 .alltag-fig{margin:0;scroll-snap-align:start}
 .alltag-fig img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#EDEDE6}
-.alltag-fig figcaption{margin-top:12px;font-size:var(--fs-sm);color:var(--ink-38)}</style>
+.alltag-fig figcaption{margin-top:12px;font-size:var(--fs-sm);color:var(--ink-38)}
+.rw-burger{display:none}
+@media (max-width:760px){
+  .hdr-in{position:relative}
+  .rw-burger{display:flex;flex-direction:column;justify-content:center;gap:5px;
+    width:34px;height:34px;flex:0 0 auto;padding:0;background:none;border:0;margin-left:4px;color:var(--ink)}
+  .hdr-trade .rw-burger{color:var(--paper)}
+  .rw-burger i{display:block;width:20px;height:1px;background:currentColor;transition:transform .25s var(--ease)}
+  .rw-burger[aria-expanded="true"] i:nth-child(1){transform:translateY(3px) rotate(45deg)}
+  .rw-burger[aria-expanded="true"] i:nth-child(2){transform:translateY(-3px) rotate(-45deg)}
+  .hdr .tools{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;
+    gap:0;padding:0 var(--gut);background:var(--paper);border-bottom:1px solid var(--hair);
+    max-height:0;overflow:hidden;visibility:hidden;transition:max-height .3s var(--ease)}
+  .hdr-trade .tools{background:var(--ink);border-bottom-color:rgba(255,255,255,.14)}
+  .hdr .tools.is-open{max-height:70vh;visibility:visible;overflow:auto;padding-block:6px 16px}
+  .hdr .tools button{padding:13px 0;font-size:17px}
+  #hdrShop .tools button[data-go="story"]{display:block}
+  .hdr-trade .tools button[data-jump]{display:block}
+  .hdr .tools .lang{padding:10px 0}
+  .cart{margin-left:auto}
+}
+</style>
 
 
 <header class="hdr" id="hdrShop">
@@ -798,24 +819,25 @@ body.lb-open{overflow:hidden}
       <button type="button" data-go="home" tabindex="-1" aria-hidden="true">w</button>
     </div>
     <nav class="tools" aria-label="Hauptnavigation">
-      <button type="button" data-go="sorten">sorten</button>
+      <button type="button" data-go="sorten">shop</button>
       <button type="button" data-go="story">unsere zutaten</button>
       <button type="button" data-go="b2b">für händler</button>
       <span class="lang" role="group" aria-label="Sprache">
         <button type="button" data-lang="de" aria-pressed="true">de</button><span aria-hidden="true">/</span><button type="button" data-lang="en" aria-pressed="false">en</button>
       </span>
-      <span class="cart">warenkorb (<span id="cartN">0</span>)</span>
     </nav>
+    <span class="cart">warenkorb (<span id="cartN">0</span>)</span>
+    <button type="button" class="rw-burger" aria-label="menü" aria-expanded="false"><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
   </div>
 </header>
 
 <header class="hdr hdr-trade" id="hdrTrade" hidden>
   <div class="hdr-in">
     <div class="trade-mark">
-      <button type="button" data-go="b2b" aria-label="raaaw für Betriebe">raaaw</button>
-      <span class="trade-tag">für betriebe</span>
+      <button type="button" data-go="b2b" aria-label="raaaw für Händler">raaaw</button>
+      <span class="trade-tag">für händler</span>
     </div>
-    <nav class="tools" aria-label="Navigation für Betriebe">
+    <nav class="tools" aria-label="Navigation für Händler">
       <button type="button" data-jump="sortiment">sortiment</button>
       <button type="button" data-jump="konditionen">konditionen</button>
       <button type="button" data-jump="regal">am regal</button>
@@ -825,6 +847,7 @@ body.lb-open{overflow:hidden}
       </span>
       <button type="button" class="leave" data-go="home">← zum onlineshop</button>
     </nav>
+    <button type="button" class="rw-burger" aria-label="menü" aria-expanded="false"><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
   </div>
 </header>
 
@@ -1604,7 +1627,7 @@ body.lb-open{overflow:hidden}
     </div>
     <div class="ft-door">
       <p>sie wollen raaaw verkaufen oder ausschenken?</p>
-      <button type="button" data-go="b2b">zum bereich für betriebe →</button>
+      <button type="button" data-go="b2b">zum bereich für händler →</button>
     </div>
     <p class="ft-word"><span>raa</span><span>a</span><span>w</span></p>
     <div class="ft-base">
@@ -1696,7 +1719,7 @@ body.lb-open{overflow:hidden}
 
   /* ---------- language ---------- */
   var EN = {
-    "sorten":"flavours","für betriebe":"for business","warenkorb (":"cart (",
+    "sorten":"flavours","für händler":"for business","warenkorb (":"cart (",
     "zutatenliste — vollständig, ungekürzt":"ingredient list — complete, unabridged",
     "zitrone":"lemon","pink grapefruit":"pink grapefruit","himbeer-limette":"raspberry-lime","limette":"lime",
     "sorte wählen":"choose a flavour","warum so wenig?":"why so little?",
@@ -1780,7 +1803,7 @@ body.lb-open{overflow:hidden}
     "menge":"quantity","lieferung":"delivery","einmalig":"one-off","abo — 5 % sparen":"subscribe — save 10 %",
     "6 dosen":"6 cans","12 dosen":"12 cans","24 dosen":"24 cans",
     "gekühlt und trocken lagern · de-öko-012 · eu-landwirtschaft":"store chilled and dry · de-öko-012 · eu agriculture",
-    "für betriebe.":"for business.",
+    "für händler.":"for business.",
     "gastronomie, studios, büros und handel. lieferung inklusive, abrechnung auf rechnung.":"food service, studios, offices and retail. delivery included, billed by invoice.",
     "produkt":"product","uvp":"rrp","inhalt":"volume","stück je tray":"units per tray","ean dose":"ean can",
     "mindestbestellmenge 3 trays, sortenrein. preise zzgl. mwst. und pfand, inklusive lieferung.":"minimum order 3 trays, single flavour. prices excl. vat and deposit, delivery included.",
@@ -1791,7 +1814,7 @@ body.lb-open{overflow:hidden}
     "am regal":"at the shelf",
     "display, kühlregal-schieber, theken-ticker und kühlschrank-beklebung stellen wir.":"display, shelf glider, counter ticker and fridge wrap are on us.",
     "ansprechpartner":"contact","bestellschein anfordern":"request order form",
-    "transparenz":"transparency","betriebe":"business","service":"service",
+    "transparenz":"transparency","händler":"business","service":"service",
     "zutaten & nährwerte":"ingredients & nutrition","herkunft":"origin","bio-zertifizierung":"organic certification","pfand & recycling":"deposit & recycling",
     "konditionen":"trade terms","bestellschein":"order form","displays & pos":"displays & pos",
     "versand":"shipping","rückgabe":"returns","kontakt":"contact",
@@ -1904,10 +1927,10 @@ body.lb-open{overflow:hidden}
     "wo du raaaw bekommst.":"where to get raaaw.",
     "über 250 orte in deutschland — am ehesten dort, wo man ohnehin auf zutaten schaut. und natürlich hier im shop.":"over 250 places in germany — mostly where people read labels anyway. and of course right here.",
     "sie wollen raaaw verkaufen oder ausschenken?":"want to stock or serve raaaw?",
-    "zum bereich für betriebe →":"go to the trade area →",
+    "zum bereich für händler →":"go to the trade area →",
 
     /* trade area */
-    "für betriebe":"for trade","sortiment":"range","konditionen":"terms","am regal":"at the shelf","kontakt":"contact",
+    "für händler":"for trade","sortiment":"range","konditionen":"terms","am regal":"at the shelf","kontakt":"contact",
     "← zum onlineshop":"← back to the shop",
     "← zum onlineshop für endkund:innen":"← back to the consumer shop",
     "handel · gastronomie · studios · büros":"retail · food service · studios · offices",
@@ -2385,5 +2408,25 @@ body.lb-open{overflow:hidden}
 })();
 </script>
 
+
+<script>
+document.addEventListener('click', function (e) {
+  var burger = e.target.closest && e.target.closest('.rw-burger');
+  if (burger) {
+    var nav = burger.parentElement.querySelector('.tools');
+    if (!nav) return;
+    var offen = nav.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', offen ? 'true' : 'false');
+    return;
+  }
+  var knopf = e.target.closest && e.target.closest('.tools button');
+  if (knopf) {
+    var nav2 = knopf.closest('.tools');
+    nav2.classList.remove('is-open');
+    var b2 = nav2.parentElement.querySelector('.rw-burger');
+    if (b2) b2.setAttribute('aria-expanded', 'false');
+  }
+});
+</script>
 </body>
 </html>
