@@ -77,6 +77,14 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
   .rw-switch button:focus{outline:none}
   .rw-switch button:focus-visible{outline:2px solid #0B0B0A;outline-offset:2px}
 }
+
+.rw-sortrow{position:relative;overflow:hidden;margin:0 calc(clamp(10px,1.4vw,18px) * -1)}
+.rw-sortrow > *:not(.rw-fill){position:relative;z-index:1}
+.rw-fill{position:absolute;inset:0;z-index:0;transform:scaleY(0);transform-origin:bottom;
+  transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.rw-sortrow:hover .rw-fill,.rw-sortrow:focus-within .rw-fill{transform:scaleY(1)}
+.rw-cansmall{transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.rw-sortrow:hover .rw-cansmall{transform:translateY(-4px) rotate(-3deg)}
 </style>
 </helmet>
 
@@ -197,11 +205,12 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
   
       <ol style="list-style:none;margin:clamp(36px,5vw,72px) 0 0;padding:0;border-top:1px solid #0B0B0A">
         <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="4">
-          <li style="display:grid;grid-template-columns:clamp(28px,4vw,44px) minmax(0,1fr);gap:clamp(10px,1.6vw,20px);padding:clamp(20px,2.6vw,34px) 0;border-bottom:1px solid #E7E7E0" style-hover="background:#FBFAF4">
+          <li class="rw-sortrow" style="display:grid;grid-template-columns:clamp(28px,4vw,44px) minmax(0,1fr);gap:clamp(10px,1.6vw,20px);padding:clamp(20px,2.6vw,34px) clamp(10px,1.4vw,18px);border-bottom:1px solid #E7E7E0">
+            <span class="rw-fill" aria-hidden="true" style="{{ s.fill }}"></span>
             <span style="font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.4);padding-top:10px">{{ s.n }}</span>
             <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2.4vw,40px)">
               <div style="flex:0 0 auto;width:56px;display:flex;justify-content:center">
-                <div role="img" aria-label="{{ s.canAlt }}" style="{{ s.canChip }}"></div>
+                <div class="rw-cansmall" role="img" aria-label="{{ s.canAlt }}" style="{{ s.canChip }}"></div>
               </div>
               <div style="flex:1 1 260px;min-width:0">
                 <h3 style="margin:0;font-weight:200;font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.04;letter-spacing:-0.04em">{{ s.name }}</h3>
@@ -1005,6 +1014,7 @@ class Component extends DCLogic {
       n: String(i + 1).padStart(2, '0'),
       k: x.k, name: x.name, note: x.note, meta: x.meta,
       canAlt: 'raaaw ' + x.name, soon: !x.available,
+      fill: 'background:linear-gradient(180deg,' + x.color + '14 0%, ' + x.color + '2E 100%)',
       canChip: x.available
         ? 'width:34px;height:62px;background-image:url("' + x.can + '");background-size:contain;background-repeat:no-repeat;background-position:center;filter:drop-shadow(0 8px 12px rgba(11,11,10,0.16))'
         : 'width:26px;height:26px;border-radius:50%;background:' + x.color + ';opacity:0.5',
