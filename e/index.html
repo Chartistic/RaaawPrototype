@@ -62,7 +62,7 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 .rw-press{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;
   overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
 .rw-press::-webkit-scrollbar{display:none}
-.rw-press img{height:clamp(22px,2.4vw,36px)!important;width:auto;flex:0 0 auto}
+.rw-press img{height:clamp(34px,4vw,58px)!important;width:auto;flex:0 0 auto}
 @media (min-width:900px){
   .rw-buywrap{justify-content:center;margin-left:calc(50% + clamp(12px,2vw,32px))}
 }
@@ -154,31 +154,9 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
   <section id="sorten" style="padding:clamp(56px,7vw,120px) clamp(18px,3vw,44px) 0">
     <div style="max-width:1560px;margin:0 auto">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(20px,4vw,80px)">
-        <h2 style="margin:0;font-weight:200;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.14;letter-spacing:-0.035em;max-width:22ch">vier zeilen. mehr steht auf der dose nicht.</h2>
+        <h2 style="margin:0;font-weight:200;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.14;letter-spacing:-0.035em;max-width:22ch">vier zutaten. das ist die ganze liste.</h2>
         <p style="margin:0;font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:rgba(11,11,10,0.6);max-width:46ch">kein aroma, das man erklären müsste. kein süßstoff, den man nachschlagen muss. wer die rückseite liest, ist in zehn sekunden fertig — und weiß dann alles.</p>
       </div>
-
-      <ol style="list-style:none;margin:clamp(36px,5vw,72px) 0 0;padding:0;border-top:1px solid #0B0B0A">
-        <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="4">
-          <li style="display:grid;grid-template-columns:clamp(28px,4vw,44px) minmax(0,1fr);gap:clamp(10px,1.6vw,20px);padding:clamp(20px,2.6vw,34px) 0;border-bottom:1px solid #E7E7E0" style-hover="background:#FBFAF4">
-            <span style="font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.4);padding-top:10px">{{ s.n }}</span>
-            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2.4vw,40px)">
-              <div style="flex:0 0 auto;width:56px;display:flex;justify-content:center">
-                <div role="img" aria-label="{{ s.canAlt }}" style="{{ s.canChip }}"></div>
-              </div>
-              <div style="flex:1 1 260px;min-width:0">
-                <h3 style="margin:0;font-weight:200;font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.04;letter-spacing:-0.04em">{{ s.name }}</h3>
-                <p style="margin:8px 0 0;font-size:14px;line-height:1.55;color:rgba(11,11,10,0.55);max-width:44ch">{{ s.note }}</p>
-              </div>
-              <p style="flex:0 1 190px;margin:0;font-size:11px;line-height:1.7;letter-spacing:0.06em;color:rgba(11,11,10,0.45)">{{ s.meta }}</p>
-              <div style="flex:0 0 auto;display:flex;align-items:center;gap:clamp(12px,1.6vw,22px)">
-                <span style="font-size:15px;color:rgba(11,11,10,0.6);white-space:nowrap">{{ s.priceLine }}</span>
-                <button type="button" disabled="{{ s.soon }}" onClick="{{ s.add }}" style="{{ s.cta }}">{{ s.ctaLabel }}</button>
-              </div>
-            </div>
-          </li>
-        </sc-for>
-      </ol>
     </div>
   </section>
 
@@ -210,44 +188,28 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 
   <section id="sorten" style="padding:clamp(44px,5.5vw,96px) clamp(18px,3vw,44px) 0">
     <div style="max-width:1560px;margin:0 auto">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(16px,4vw,80px)">
-        <h2 style="margin:0;font-weight:200;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.06;letter-spacing:-0.04em;max-width:16ch">vier sorten. eine haltung.</h2>
-        <p style="margin:0;font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:rgba(11,11,10,0.55);max-width:44ch">jede sorte bekommt ihre frucht von dort, wo sie hingehört. gleiche rezeptur, gleicher verzicht: kein aroma, kein konzentrat, kein süßstoff.</p>
-      </div>
-      <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(64vw,260px),1fr);gap:clamp(14px,2vw,28px);margin-top:clamp(24px,3.4vw,52px);overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain;padding-bottom:6px">
-        <article style="scroll-snap-align:start;display:flex;flex-direction:column;gap:14px">
-          <div style="aspect-ratio:4/5;background:#F3F3EE;display:flex;align-items:center;justify-content:center;padding:clamp(16px,2vw,30px)"><img src="/c/assets/can/zitrone.webp" alt="bio-zitrone" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-          <div>
-            <p style="margin:0;font-size:17px;letter-spacing:-0.02em">bio-zitrone</p>
-            <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">siracusa, sizilien</p>
-            <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:rgba(11,11,10,0.6)">3 % bio-direktsaft und zestenextrakt</p>
-          </div>
-        </article>
-        <article style="scroll-snap-align:start;display:flex;flex-direction:column;gap:14px">
-          <div style="aspect-ratio:4/5;background:#F3F3EE;display:flex;align-items:center;justify-content:center;padding:clamp(16px,2vw,30px)"><img src="/c/assets/can/grapefruit.webp" alt="bio pink grapefruit" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-          <div>
-            <p style="margin:0;font-size:17px;letter-spacing:-0.02em">bio pink grapefruit</p>
-            <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">sizilien</p>
-            <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:rgba(11,11,10,0.6)">7 % bio-direktsaft, farbe aus bio-hibiskus</p>
-          </div>
-        </article>
-        <article style="scroll-snap-align:start;display:flex;flex-direction:column;gap:14px">
-          <div style="aspect-ratio:4/5;background:#F3F3EE;display:flex;align-items:center;justify-content:center;padding:clamp(16px,2vw,30px)"><img src="/c/assets/can/himbeere.webp" alt="bio himbeere &amp; limette" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-          <div>
-            <p style="margin:0;font-size:17px;letter-spacing:-0.02em">bio himbeere &amp; limette</p>
-            <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">serbien · brasilien</p>
-            <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:rgba(11,11,10,0.6)">püree statt konzentrat, naturtrüb</p>
-          </div>
-        </article>
-        <article style="scroll-snap-align:start;display:flex;flex-direction:column;gap:14px">
-          <div style="aspect-ratio:4/5;background:#F3F3EE;display:flex;align-items:center;justify-content:center;padding:clamp(16px,2vw,30px)"><span style="font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.4)">bald verfügbar</span></div>
-          <div>
-            <p style="margin:0;font-size:17px;letter-spacing:-0.02em">bio-limette</p>
-            <p style="margin:4px 0 0;font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.45)">brasilien</p>
-            <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:rgba(11,11,10,0.6)">3 % bio-direktsaft — kommt als vierte sorte dazu</p>
-          </div>
-        </article>
-      </div>
+  
+      <ol style="list-style:none;margin:clamp(36px,5vw,72px) 0 0;padding:0;border-top:1px solid #0B0B0A">
+        <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="4">
+          <li style="display:grid;grid-template-columns:clamp(28px,4vw,44px) minmax(0,1fr);gap:clamp(10px,1.6vw,20px);padding:clamp(20px,2.6vw,34px) 0;border-bottom:1px solid #E7E7E0" style-hover="background:#FBFAF4">
+            <span style="font-size:12px;letter-spacing:0.04em;color:rgba(11,11,10,0.4);padding-top:10px">{{ s.n }}</span>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2.4vw,40px)">
+              <div style="flex:0 0 auto;width:56px;display:flex;justify-content:center">
+                <div role="img" aria-label="{{ s.canAlt }}" style="{{ s.canChip }}"></div>
+              </div>
+              <div style="flex:1 1 260px;min-width:0">
+                <h3 style="margin:0;font-weight:200;font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.04;letter-spacing:-0.04em">{{ s.name }}</h3>
+                <p style="margin:8px 0 0;font-size:14px;line-height:1.55;color:rgba(11,11,10,0.55);max-width:44ch">{{ s.note }}</p>
+              </div>
+              <p style="flex:0 1 190px;margin:0;font-size:11px;line-height:1.7;letter-spacing:0.06em;color:rgba(11,11,10,0.45)">{{ s.meta }}</p>
+              <div style="flex:0 0 auto;display:flex;align-items:center;gap:clamp(12px,1.6vw,22px)">
+                <span style="font-size:15px;color:rgba(11,11,10,0.6);white-space:nowrap">{{ s.priceLine }}</span>
+                <button type="button" disabled="{{ s.soon }}" onClick="{{ s.add }}" style="{{ s.cta }}">{{ s.ctaLabel }}</button>
+              </div>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
     </div>
   </section>
 
