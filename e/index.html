@@ -91,7 +91,9 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 @media (min-width:900px){
   .rw-hero-split{grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr)!important}
   .rw-hero-split > div:last-child{justify-content:flex-start!important;padding-left:clamp(30px,7%,110px)}
-  .rw-buywrap{margin-left:calc(57.5% + 8px)!important}
+  .rw-buywrap{display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);
+    gap:clamp(24px,4vw,64px);margin-left:0!important;justify-content:initial!important}
+  .rw-buywrap > *{grid-column:2;justify-self:start;margin-left:calc(clamp(30px,7%,110px) - 55px)}
 }
 </style>
 </helmet>
