@@ -25,6 +25,39 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 @keyframes rwSlide{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
 @keyframes rwRun{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){*{animation:none !important}}
+
+.rw-buywrap{display:flex;justify-content:flex-end;margin-top:clamp(22px,3vw,34px)}
+.rw-benefits{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+@media (max-width:900px){
+  .rw-buywrap{justify-content:center}
+}
+@media (max-width:640px){
+  .rw-benefits{grid-template-columns:1fr}
+}
+
+.rw-clip{position:relative;display:block;width:100%;aspect-ratio:9/16;padding:0;border:0;background:#EDEDE6;
+  overflow:hidden;cursor:pointer}
+.rw-clip-poster,.rw-clip-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.rw-clip-vid{opacity:0;transition:opacity .3s ease}
+.rw-clip.is-playing .rw-clip-vid{opacity:1}
+.rw-clip.is-playing .rw-clip-poster{opacity:0}
+.rw-clip.is-playing .rw-clip-play::after{border:0;width:4px;height:13px;border-left:4px solid #0B0B0A;
+  border-right:4px solid #0B0B0A;margin-left:0}
+.rw-clip-play{position:absolute;top:14px;left:14px;width:36px;height:36px;border-radius:50%;
+  background:rgba(252,252,250,0.92);display:flex;align-items:center;justify-content:center;transition:transform .2s ease}
+.rw-clip:hover .rw-clip-play{transform:scale(1.1)}
+.rw-clip-play::after{content:"";width:0;height:0;border-left:11px solid #0B0B0A;border-top:7px solid transparent;
+  border-bottom:7px solid transparent;margin-left:3px}
+.rw-clip-cap{position:absolute;left:14px;right:14px;bottom:14px;color:#FCFCFA;font-size:14px;line-height:1.4;
+  text-align:left;text-shadow:0 1px 14px rgba(0,0,0,0.6)}
+.rw-clip-buy{display:flex;align-items:center;gap:10px;padding:12px 4px 0}
+.rw-clip-buy img{width:26px;height:auto;flex:none}
+.rw-clip-buy span{display:flex;flex-direction:column;line-height:1.3;flex:1;min-width:0}
+.rw-clip-buy b{font-weight:400;font-size:14px}
+.rw-clip-buy i{font-style:normal;font-size:12px;color:rgba(11,11,10,0.5)}
+.rw-clip-buy a{flex:none;min-height:36px;padding:0 16px;border:1px solid rgba(11,11,10,0.16);border-radius:999px;
+  display:flex;align-items:center;font-size:13px}
+.rw-clip-buy a:hover{border-color:#0B0B0A}
 </style>
 </helmet>
 
@@ -75,7 +108,7 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
       </div>
     </div>
 
-    <div style="display:flex;justify-content:flex-end;margin-top:clamp(22px,3vw,34px)">
+    <div class="rw-buywrap">
         <div style="width:min(100%,360px);padding:clamp(20px,2.2vw,28px);background:rgba(252,252,250,0.78);backdrop-filter:blur(10px);border:1px solid rgba(11,11,10,0.08)">
           <p style="margin:0;font-size:17px;letter-spacing:-0.02em">probierpaket</p>
           <p style="margin:6px 0 0;font-size:13px;color:rgba(11,11,10,0.55)">alle sorten, sechs dosen</p>
@@ -90,7 +123,7 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
     </div>
   </section>
 
-  <ul style="list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:1px;margin:0;padding:0;background:#E7E7E0;border-top:1px solid #E7E7E0;border-bottom:1px solid #E7E7E0">
+  <ul class="rw-benefits" style="list-style:none;display:grid;gap:1px;margin:0;padding:0;background:#E7E7E0;border-top:1px solid #E7E7E0;border-bottom:1px solid #E7E7E0">
     <li style="background:#FCFCFA;padding:clamp(14px,2vw,26px) clamp(18px,3vw,32px);font-size:14px;color:rgba(11,11,10,0.62)">ohne zuckerzusatz</li>
     <li style="background:#FCFCFA;padding:clamp(14px,2vw,26px) clamp(18px,3vw,32px);font-size:14px;color:rgba(11,11,10,0.62)">100 % bio · de-öko-012</li>
     <li style="background:#FCFCFA;padding:clamp(14px,2vw,26px) clamp(18px,3vw,32px);font-size:14px;color:rgba(11,11,10,0.62)">feinperlig, wenig kohlensäure</li>
@@ -122,14 +155,18 @@ button{font:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
 
       <div style="display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(72vw,300px),1fr);gap:clamp(14px,2vw,24px);margin-top:clamp(20px,3vw,44px);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain">
         <sc-for list="{{ clips }}" as="c" hint-placeholder-count="5">
-          <figure style="margin:0;scroll-snap-align:start">
-            <div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;background:#EDEDE6">
-              <span style="position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:7px;padding:6px 10px;background:rgba(11,11,10,0.82);color:#FCFCFA;font-size:11px;letter-spacing:0.04em">
-                <span aria-hidden="true" style="width:6px;height:6px;border-radius:50%;background:#F2DC4E"></span>clip {{ c.n }}
-              </span>
-              <video src="{{ c.vid }}" poster="{{ c.pos }}" controls playsinline preload="metadata" aria-label="{{ c.cap }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0B0B0A"></video>
-            </div>
-            <figcaption style="margin-top:12px;font-size:14px;line-height:1.5;color:rgba(11,11,10,0.6)">{{ c.cap }}</figcaption>
+          <figure style="margin:0;scroll-snap-align:start;background:#FCFCFA;display:flex;flex-direction:column">
+            <button type="button" class="rw-clip" aria-label="clip abspielen: {{ c.cap }}">
+              <img class="rw-clip-poster" src="{{ c.pos }}" alt="{{ c.cap }}" loading="lazy">
+              <video class="rw-clip-vid" src="{{ c.vid }}" playsinline loop preload="none" aria-hidden="true"></video>
+              <span class="rw-clip-play" aria-hidden="true"></span>
+              <span class="rw-clip-cap">{{ c.cap }}</span>
+            </button>
+            <figcaption class="rw-clip-buy">
+              <img src="{{ c.can }}" alt="" aria-hidden="true">
+              <span><b>{{ c.sorte }}</b><i>2,24 € je dose</i></span>
+              <a href="#kaufen">kaufen</a>
+            </figcaption>
           </figure>
         </sc-for>
       </div>
@@ -874,11 +911,11 @@ class Component extends DCLogic {
       ],
 
       clips: [
-        {n:'01', cap:'auf der straße gefragt. antwort ohne skript.', ph:'bildfeld 15 · passantin am viktualienmarkt, erster schluck', vid:'/c/assets/vid/s1.mp4', pos:'/c/assets/img/70.webp'},
-        {n:'02', cap:'zwischen zwei terminen, mit hund.', ph:'bildfeld 16 · frau mit hund am odeonsplatz', vid:'/c/assets/vid/s2.mp4', pos:'/c/assets/img/71.webp'},
-        {n:'03', cap:'drei freundinnen, eine frage.', ph:'bildfeld 17 · drei freundinnen in der innenstadt', vid:'/c/assets/vid/s3.mp4', pos:'/c/assets/img/72.webp'},
-        {n:'04', cap:'samstag am markt, spontan gefragt.', ph:'bildfeld 18 · zwei frauen am viktualienmarkt', vid:'/c/assets/vid/s4.mp4', pos:'/c/assets/img/73.webp'},
-        {n:'05', cap:'andi, coach im basement münchen.', ph:'bildfeld 19 · coach im studio, nach dem kurs', vid:'/c/assets/vid/s5.mp4', pos:'/c/assets/img/74.webp'}
+        {n:'01', cap:'auf der straße gefragt. antwort ohne skript.', ph:'bildfeld 15 · passantin am viktualienmarkt, erster schluck', vid:'/c/assets/vid/s1.mp4', pos:'/c/assets/img/70.webp', can:'/c/assets/can/grapefruit.webp', sorte:'pink grapefruit'},
+        {n:'02', cap:'zwischen zwei terminen, mit hund.', ph:'bildfeld 16 · frau mit hund am odeonsplatz', vid:'/c/assets/vid/s2.mp4', pos:'/c/assets/img/71.webp', can:'/c/assets/can/grapefruit.webp', sorte:'pink grapefruit'},
+        {n:'03', cap:'drei freundinnen, eine frage.', ph:'bildfeld 17 · drei freundinnen in der innenstadt', vid:'/c/assets/vid/s3.mp4', pos:'/c/assets/img/72.webp', can:'/c/assets/can/zitrone.webp', sorte:'zitrone'},
+        {n:'04', cap:'samstag am markt, spontan gefragt.', ph:'bildfeld 18 · zwei frauen am viktualienmarkt', vid:'/c/assets/vid/s4.mp4', pos:'/c/assets/img/73.webp', can:'/c/assets/can/zitrone.webp', sorte:'zitrone'},
+        {n:'05', cap:'andi, coach im basement münchen.', ph:'bildfeld 19 · coach im studio, nach dem kurs', vid:'/c/assets/vid/s5.mp4', pos:'/c/assets/img/74.webp', can:'/c/assets/can/zitrone.webp', sorte:'zitrone'}
       ],
 
       places: [
@@ -979,6 +1016,24 @@ class Component extends DCLogic {
     };
   }
 }
+</script>
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('.rw-clip');
+    if (!btn) return;
+    var vid = btn.querySelector('.rw-clip-vid');
+    if (!vid) return;
+    if (btn.classList.contains('is-playing')) { vid.pause(); btn.classList.remove('is-playing'); return; }
+    document.querySelectorAll('.rw-clip.is-playing').forEach(function (o) {
+      var v = o.querySelector('.rw-clip-vid'); if (v) { v.pause(); } o.classList.remove('is-playing');
+    });
+    vid.muted = false; vid.currentTime = 0;
+    var p = vid.play();
+    if (p && p.catch) { p.catch(function () { vid.muted = true; vid.play(); }); }
+    btn.classList.add('is-playing');
+  });
+}());
 </script>
 </body>
 </html>
